@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Call Button</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <button id="apiButton" class="APIclickbutton">Click Me</button>
+    <p id="message">Success! API call completed.</p>
+    
+    <script>
+        document.getElementById("apiButton").addEventListener("click", function() {
+            fetch("http://192.168.11.53:8000/UpdateOpenMailIDRunner", {
+                method: "POST"
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("API Response:", data);
+                document.getElementById("message").innerHTML = JSON.stringify(data, null, 2); // Display API response
+                document.getElementById("message").style.display = "block";
+            })
+            .catch(error => {
+                console.error("Error calling API:", error);
+                document.getElementById("message").innerHTML = "Failed to fetch data.";
+                document.getElementById("message").style.display = "block";
+            });
+        });
+    </script>
+    
+</body>
+</html>
