@@ -35,7 +35,7 @@
             })
             .then(data => {
                 console.log("API Response:", data);
-                document.getElementById("message").innerHTML = JSON.stringify(data, null, 2); // Display API response
+                document.getElementById("message").innerHTML = "Failed to fetch data."; // Display API response
                 document.getElementById("message").style.display = "block";
             })
             .catch(error => {
